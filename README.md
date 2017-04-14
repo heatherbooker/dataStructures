@@ -1,4 +1,22 @@
-# dataStructures
-collection of custom data structures
---> to demonstrate and cement comprehension of functionality of important data structures.
-1. mock array constructor, based on object constructor, makes simple imitation of array with methods 'push' and 'getAt'.
+# Data Structures
+
+A collection of custom data structures and algorithms.
+
+--> To demonstrate and cement comprehension of functionality of important data structures and algorithms.
+
+Each struct has a readme which lists its methods, explains its runtime, and elucidates uses and pros/cons. Accompanying each implementation is a test script, with one example of n=10 and one of n=1000, to emphasize runtimes.
+
+### Structs
+
+[x] Array
+[ ] Set 
+[ ] Linked list
+[ ] Stack
+[ ] Queue
+[ ] Hashmap
+[ ] Tree
+[ ] Binary search tree
+[ ] Balanced tree
+
+### Algos
+
