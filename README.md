@@ -8,15 +8,15 @@ Each struct has a readme which lists its methods, explains its runtime, and eluc
 
 ### Structs
 
-[x] Array
-[ ] Set 
-[ ] Linked list
-[ ] Stack
-[ ] Queue
-[ ] Hashmap
-[ ] Tree
-[ ] Binary search tree
-[ ] Balanced tree
+[x] Array  
+[ ] Set  
+[ ] Linked list  
+[ ] Stack  
+[ ] Queue  
+[ ] Hashmap  
+[ ] Tree  
+[ ] Binary search tree  
+[ ] Balanced tree  
 
 ### Algos
 
