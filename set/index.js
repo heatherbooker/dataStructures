@@ -55,53 +55,66 @@ function MySet() {
     };
 
     this.union = (other) => {
-        const union = [];
+        const union = new MySet();
         const len = getLength(other.set);
         for (let i = 0; i < len; i++) {
             if (this.contains(other.set[i])) {
-                union.push(other.set[i]);
+                union.add(other.set[i]);
             }
         }
         return union;
     };
 
     this.intersect = (other) => {
-        const intersection = [];
-        const len = Math.math(this.length(), getLength(other.set));
+        const intersection = new MySet();
+        const len = Math.max(this.length(), getLength(other.set));
         for (let i = 0; i < len; i++) {
             if (this.set[i] !== undefined) {
-                intersection.push(this.set[i]);
+                intersection.add(this.set[i]);
             }
             if (other.set[i] !== undefined) {
-                intersection.push(other.set[i]);
+                intersection.add(other.set[i]);
             }
         }
         return intersection;
     };
 
     this.difference = (other) => {
-        const diff = [];
+        const diff = new MySet();
         const len = this.length();
         for (let i = 0; i < len; i++) {
             if (!contains(other.set, this.set[i])) {
-                diff.push(this.set[i]);
+                diff.add(this.set[i]);
             }
         }
         return diff;    
     };
     
-    this.isSubset = (other) => {
-        const len = getLength(other.set);
+    this.isSubsetOf = (other) => {
+        const len = this.length();
         for (let i = 0; i < len; i++) {
-            if (!this.contains(other.set[i])) {
+            if (!other.contains(this.set[i])) {
                 return false;
             }
         }
         return true;
     };
 
-    this.print = () => {
-        console.log(this.set);
+    this.toString = () => {
+        let string = "[";
+        const len = this.length();
+        for (let i = 0; i < len; i++) {
+            if (typeof this.set[i] === 'string') {
+                string += `"${this.set[i]}"`;
+            } else {
+                string += this.set[i];
+            }
+            if (i + 1 < len) {
+                string += ',';
+            }
+        }
+        string += "]";
+        return string;
     };
 }
 

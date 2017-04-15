@@ -1,0 +1,24 @@
+{
+  "name": "dataStructures",
+  "version": "1.0.0",
+  "description": "A collection of custom data structures and algorithms.",
+  "main": "aQueue.js",
+  "scripts": {
+    "test": "mocha */test.js || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heatherbooker/dataStructures.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heatherbooker/dataStructures/issues"
+  },
+  "homepage": "https://github.com/heatherbooker/dataStructures#readme",
+  "dependencies": {
+    "chai": "3.5.0",
+    "mocha": "3.2.0"
+  }
+}
