@@ -5,6 +5,15 @@ const assert = require('chai').assert;
 let setA, setB, setC;
 
 
+function timeToAddN(n) {
+    const start = Date.now();
+    for (let i = 0; i < n; i++) {
+        setA.add(i);
+    }
+    const end = Date.now();
+    return (end - start);
+}
+
 describe('set', function() {
     
     beforeEach(function() {
@@ -18,6 +27,15 @@ describe('set', function() {
         setA.add(el);
         assert(setA.contains(el));
         assert.include(setA.toArray(), el);
+    });
+
+    it('takes O(n) to add', function() {
+        const times = [];
+        for (let i = 1; i <= 2000; i+=40) {
+            setA = new MySet();
+            times.push(timeToAddN(i));
+        }
+        console.log('times to add n elements, where n is from 1 - 2000, incrementing by 40', JSON.stringify(times));
     });
     
     it('does not add non-unique elements', function() {
