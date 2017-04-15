@@ -2,9 +2,9 @@
 
 function MySet() {
     
-    this.set = [];
+    const set = [];
 
-    const getLength = (aSet) => {
+    const _getLength = (aSet) => {
         let i = 0;
         while (true) {
             if (aSet[i] === undefined) {
@@ -14,16 +14,7 @@ function MySet() {
         }
     };
 
-    const contains = (aSet, el) => {
-        if (this.indexOf(aSet, el) > -1) {
-            return true;
-        }
-        return false;
-    };
-
-    this.length = () => getLength(this.set);
-
-    this.indexOf = (aSet, el) => {
+    const _indexOf = (aSet, el) => {
         const len = this.length();
         for (let i = 0; i < len; i++) {
             if (el === aSet[i]) {
@@ -33,33 +24,42 @@ function MySet() {
         return -1;
     };
 
+    const _contains = (aSet, el) => {
+        if (_indexOf(aSet, el) > -1) {
+            return true;
+        }
+        return false;
+    };
+
+    this.length = () => _getLength(set);
+
     this.contains = (el) => {
-        return contains(this.set, el);
+        return _contains(set, el);
     };
 
     this.add = (el) => {
         if (!this.contains(el)) {
-            this.set.push(el);
+            set.push(el);
         }
-        return this.set;
+        return set;
     };
 
     this.remove = (el) => {
-        let index = this.indexOf(this.set, el);
-        this.set[index] = null;
+        let index = _indexOf(set, el);
+        set[index] = null;
         const len = this.length();
         for (index; index < len; index++) {
-            this.set[index] = this.set[index + 1];
+            set[index] = set[index + 1];
         }
-        return this.set;
+        return set;
     };
 
     this.union = (other) => {
         const union = new MySet();
-        const len = getLength(other.set);
+        const len = _getLength(other.toArray());
         for (let i = 0; i < len; i++) {
-            if (this.contains(other.set[i])) {
-                union.add(other.set[i]);
+            if (this.contains(other.toArray()[i])) {
+                union.add(other.toArray()[i]);
             }
         }
         return union;
@@ -67,13 +67,13 @@ function MySet() {
 
     this.intersect = (other) => {
         const intersection = new MySet();
-        const len = Math.max(this.length(), getLength(other.set));
+        const len = Math.max(this.length(), _getLength(other.toArray()));
         for (let i = 0; i < len; i++) {
-            if (this.set[i] !== undefined) {
-                intersection.add(this.set[i]);
+            if (set[i] !== undefined) {
+                intersection.add(set[i]);
             }
-            if (other.set[i] !== undefined) {
-                intersection.add(other.set[i]);
+            if (other.toArray()[i] !== undefined) {
+                intersection.add(other.toArray()[i]);
             }
         }
         return intersection;
@@ -83,8 +83,8 @@ function MySet() {
         const diff = new MySet();
         const len = this.length();
         for (let i = 0; i < len; i++) {
-            if (!contains(other.set, this.set[i])) {
-                diff.add(this.set[i]);
+            if (!other.contains(set[i])) {
+                diff.add(set[i]);
             }
         }
         return diff;    
@@ -93,7 +93,7 @@ function MySet() {
     this.isSubsetOf = (other) => {
         const len = this.length();
         for (let i = 0; i < len; i++) {
-            if (!other.contains(this.set[i])) {
+            if (!other.contains(set[i])) {
                 return false;
             }
         }
@@ -104,10 +104,10 @@ function MySet() {
         let string = "[";
         const len = this.length();
         for (let i = 0; i < len; i++) {
-            if (typeof this.set[i] === 'string') {
-                string += `"${this.set[i]}"`;
+            if (typeof set[i] === 'string') {
+                string += `"${set[i]}"`;
             } else {
-                string += this.set[i];
+                string += set[i];
             }
             if (i + 1 < len) {
                 string += ',';
@@ -115,6 +115,10 @@ function MySet() {
         }
         string += "]";
         return string;
+    };
+
+    this.toArray = () => {
+        return set;
     };
 }
 
