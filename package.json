@@ -4,7 +4,8 @@
   "description": "A collection of custom data structures and algorithms.",
   "main": "aQueue.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha */test.js || true"
+    "test": "nyc --reporter=html --reporter=text mocha */test.js || true",
+    "devtest": "mocha */test.js || true"
   },
   "repository": {
     "type": "git",
