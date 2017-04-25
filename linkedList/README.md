@@ -22,3 +22,6 @@ length      | O(n)
 toString    | O(n)
 toArray     | O(n)
 
+### Test coverage
+
+[Check it out](https://heatherbooker.github.io/dataStructures/coverage/linkedList/index.html)
