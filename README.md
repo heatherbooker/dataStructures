@@ -20,7 +20,7 @@ npm test
 
 [x] Array  
 [x] Set  
-[ ] Linked list  
+[x] Linked lists (doubly & singly)
 [ ] Stack  
 [ ] Queue  
 [ ] Hashmap  
