@@ -16,7 +16,7 @@ function timeToAddN(n) {
     return (end - start);
 }
 
-describe.only('singly linked list', function() {
+describe('singly linked list', function() {
     
     beforeEach(function() {
         linkedlist = new LinkedList();
@@ -26,7 +26,16 @@ describe.only('singly linked list', function() {
         const el = 'wicked cat hats';
         linkedlist.add(el);
         const list = linkedlist.toArray(); 
-        expect(list).to.have.deep.property('[0].data', el);
+        assert.include(list, el);
+    });
+
+    it('takes O(n) to add (LOOK AT TIMES TO CONFIRM)', function() {
+        const times = [];
+        for (let i = 1; i <= 2000; i+=40) {
+            linkedlist = new LinkedList();
+            times.push(timeToAddN(i));
+        }
+        console.log('times to add n elements, where n is from 1 - 2000, incrementing by 40', JSON.stringify(times));
     });
 
     it('can find the length', function() {
@@ -41,23 +50,39 @@ describe.only('singly linked list', function() {
     it('can remove elements', function() {
         const el1 = 'waffles';
         const el2 = 'snoggin';
+        const el3 = 'crepit crackinlack';
         linkedlist.add(el1);
-        linkedlist.add('crepit crackinlack');
         linkedlist.add(el2);
+        linkedlist.add(el3);
 
-        linkedlist.remove(el1);
         let list = linkedlist.toArray();
-        assert.equal(list[0], undefined);
-        
+        // Make sure the element was originally there.
+        assert.lengthOf(list, 3);
         linkedlist.remove(el2);
         list = linkedlist.toArray();
-        assert.equal(list[1], undefined, JSON.stringify(list));
+        assert.lengthOf(list, 2);
+        assert.notInclude(el2);
+
+        linkedlist.remove(el3);
+        list = linkedlist.toArray();
+        assert.notInclude(el3);
+    });
+
+    it('can insert after any node', function() {
+        const el = 'blippni';
+        linkedlist.add(el);
+        linkedlist.add('wagon wheels');
+        linkedlist.add('ninja');
+        linkedlist.insertAfter(el, 99);
+
+        let list = linkedlist.toArray();
+        assert.equal(list[1], 99);
     });
 
     it('can be stringified', function() {
         linkedlist.add('pizzasz');
         linkedlist.add(7);
-        const string = JSON.stringify(linkedlist.toArray());
+        const string = 'pizzasz -> 7 -> null';
         assert.equal(string, linkedlist.toString());
     });
 });

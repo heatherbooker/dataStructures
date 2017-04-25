@@ -1,98 +1,111 @@
 'use strict';
 
 function LinkedList() {
+    this.head = null;
 
-    const list = [];
-    let start = 0;
+    this.traverse = function(callback, needsResults) {
+        let currNode = this.head;
+        const results = {
+            num: 0,
+            str: '',
+            arr: []
+        };
 
-    this.length = () => {
-        if (list[start] === undefined) {
-            return 0; 
+        while (currNode !== null) {
+            // Passing object allows callback to store whatever they want.
+            // Else they can return a truthy value if they only want final.
+            results._final = callback(currNode, results);
+            currNode = currNode.link;    
         }
-        let i = start;
-        let length = 1;
-        while (true) {
-            if (list[i].next === null) {
-                return length;
-            } else {
-                i = list[i].next;
-                length++;
-            }
-        }
+        
+        return results._final || results;
     };
 
-    this.add = (el) => {
-        const node = { data: el, next: null };
-        if (this.length() !== 0) {
-            let i = start;
-            while (list[i].next !== null) {
-                i = list[i].next;
+    this.length = function() {
+        const findLen = (node, results) => {
+            const len = ++results.num;
+            if (node.link === null) {
+                return len;
             }
-            list[i].next = this.length();
-        }
-        list.push(node);
+        };
+        return this.traverse(findLen, true);
     };
 
-    this.remove = (el) => {
-        let i = start;
-        let prevNode = null;
-        while (list[i].data !== el) {
-            prevNode = list[i];
-            i = list[i].next;
-        }
-        const next = list[i].next;
-        list[i] = undefined;
-        if (prevNode !== null) {
-            prevNode.next = next;
-        } else if (next === null) {
-            start = 0;
+    this.add = function(data) {
+        const nodeToAdd = new Node(data);
+        
+        if (this.head === null) {
+            this.head = nodeToAdd;
+
         } else {
-            start += 1; 
+            const findLast = node => node.link === null ? node : null;
+            const currTail = this.traverse(findLast, false);
+            currTail.link = nodeToAdd;
         }
     };
 
-    this.insertAfter = (elToInsert, elToFollow) => {
-        let i = start;
-        while (list[i].data !== elToFollow) {
-            i = list[i].next;
-        }
-        const node = { data: elToInsert, next: list[i].next };
-        list[i].next = this.length();
-        list.push(node);
-    };
+    this.insertAfter = function(afterData, newData) {
+        let currNode = this.head;
+        let prevNode = currNode;
+        const nodeToInsert = new Node(newData);
 
-    this.traverse = (func) => {
-        let i = start;
-        while (i !== null) {
-            func(list[i]);
-            i = list[i].next;
-        }
-    };
-
-    this.toString = () => {
-        let string = "[";
-        let i = start;
-        while (list[i] !== undefined) {
-            if (typeof list[i].data === 'string') {
-                string += `{"data":"${list[i].data}",`;
-            } else {
-                string += `{"data":${list[i].data},`;
-            }
-            string += `"next":${list[i].next}}`;
-            if (list[i].next !== null) {
-                string += ',';
-                i = list[i].next;
-            } else {
+        while (currNode !== null) {
+            if (currNode.data === afterData) {
                 break;
+            } else {
+                prevNode = currNode;
+                currNode = currNode.link;
             }
         }
-        string += ']';
-        return string;
+
+        const nextNode = prevNode.link;
+        prevNode.link = nodeToInsert;
+        nodeToInsert.link = nextNode;
     };
 
-    this.toArray = () => {
-        return list;
+    this.remove = function(data) {
+        let prevNode = null;
+        let currNode = this.head;
+        
+        while (currNode !== null) {
+            if (currNode.data === data)  {
+                break;
+            } else {
+                prevNode = currNode;
+                currNode = currNode.link;
+            }
+        }
+
+        const nextNode = prevNode && prevNode.link.link || null;
+        if (prevNode === null) {
+            this.head = nextNode;
+        } else {
+            prevNode.link = nextNode;
+        }
     };
+
+    this.toString = function() {
+        const toString = (node, results) => {
+            results.str += node.data + ' -> ';
+            if (node.link == null) {
+                results.str += 'null';
+                return results.str;
+            }
+        };
+        return this.traverse(toString, true);
+    };
+
+    this.toArray = function() {
+        const toArray = (node, results) => {
+            results.arr.push(node.data);
+        };
+        return this.traverse(toArray, true).arr;
+    };
+}
+
+function Node(data) {
+    this.data = data;
+    this.link = null;
 }
 
 module.exports = LinkedList;

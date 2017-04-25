@@ -29,7 +29,7 @@ describe('set', function() {
         assert.include(setA.toArray(), el);
     });
 
-    it('takes O(n) to add', function() {
+    it('takes O(n) to add (LOOK AT TIMES TO CONFIRM)', function() {
         const times = [];
         for (let i = 1; i <= 2000; i+=40) {
             setA = new MySet();
