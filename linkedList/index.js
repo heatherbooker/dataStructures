@@ -24,11 +24,8 @@ function LinkedList() {
     this.length = function() {
         const findLen = (node, results) => {
             const len = ++results.num;
-            if (node.link === null) {
-                return len;
-            }
         };
-        return this.traverse(findLen, true);
+        return this.traverse(findLen, true).num;
     };
 
     this.add = function(data) {
@@ -46,20 +43,18 @@ function LinkedList() {
 
     this.insertAfter = function(afterData, newData) {
         let currNode = this.head;
-        let prevNode = currNode;
         const nodeToInsert = new Node(newData);
 
         while (currNode !== null) {
             if (currNode.data === afterData) {
                 break;
             } else {
-                prevNode = currNode;
                 currNode = currNode.link;
             }
         }
 
-        const nextNode = prevNode.link;
-        prevNode.link = nodeToInsert;
+        const nextNode = currNode.link;
+        currNode.link = nodeToInsert;
         nodeToInsert.link = nextNode;
     };
 

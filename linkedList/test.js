@@ -39,15 +39,16 @@ describe('singly linked list', function() {
     });
 
     it('can find the length', function() {
-        assert.equal(linkedlist.toArray().length, 0);
+        assert.equal(linkedlist.length(), 0);
         linkedlist.add('mizpah ghetti');
-        assert.equal(linkedlist.toArray().length, 1);
+        assert.equal(linkedlist.length(), 1);
         linkedlist.add(647474);
         linkedlist.add('wicked shocks!');
-        assert.equal(linkedlist.toArray().length, 3);
+        assert.equal(linkedlist.length(), 3);
     });
 
-    it('can remove elements', function() {
+    describe('removing elements', function() {
+        const linkedlist = new LinkedList();
         const el1 = 'waffles';
         const el2 = 'snoggin';
         const el3 = 'crepit crackinlack';
@@ -55,17 +56,27 @@ describe('singly linked list', function() {
         linkedlist.add(el2);
         linkedlist.add(el3);
 
-        let list = linkedlist.toArray();
-        // Make sure the element was originally there.
-        assert.lengthOf(list, 3);
-        linkedlist.remove(el2);
-        list = linkedlist.toArray();
-        assert.lengthOf(list, 2);
-        assert.notInclude(el2);
+        it('can remove a middle element', function() {
+            let list = linkedlist.toArray();
+            // Make sure the element was originally there.
+            assert.lengthOf(list, 3);
+            linkedlist.remove(el2);
+            list = linkedlist.toArray();
+            assert.lengthOf(list, 2);
+            assert.notInclude(el2);
+        });
 
-        linkedlist.remove(el3);
-        list = linkedlist.toArray();
-        assert.notInclude(el3);
+        it('can remove the last element', function() {
+            linkedlist.remove(el3);
+            let list = linkedlist.toArray();
+            assert.notInclude(el3);
+        });
+
+        it('can remove the first element', function() {
+            linkedlist.remove(el1);
+            let list = linkedlist.toArray();
+            assert.notInclude(el1);
+        });
     });
 
     it('can insert after any node', function() {
@@ -73,10 +84,16 @@ describe('singly linked list', function() {
         linkedlist.add(el);
         linkedlist.add('wagon wheels');
         linkedlist.add('ninja');
-        linkedlist.insertAfter(el, 99);
 
+        linkedlist.insertAfter(el, 99);
         let list = linkedlist.toArray();
         assert.equal(list[1], 99);
+
+        const el2 = 'winter snowfaluff';
+        linkedlist.insertAfter('ninja', el2);
+        list = linkedlist.toArray();
+        assert.equal(list[4], el2);
+        
     });
 
     it('can be stringified', function() {
