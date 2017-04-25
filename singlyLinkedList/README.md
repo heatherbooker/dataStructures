@@ -24,4 +24,4 @@ toArray     | O(n)
 
 ### Test coverage
 
-[Check it out](https://heatherbooker.github.io/dataStructures/coverage/linkedList/index.html)
+[Check it out](https://heatherbooker.github.io/dataStructures/coverage/singlyLinkedList/index.html)

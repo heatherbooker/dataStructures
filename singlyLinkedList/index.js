@@ -1,6 +1,6 @@
 'use strict';
 
-function LinkedList() {
+function SinglyLinkedList() {
     this.head = null;
 
     this.traverse = function(callback, needsResults) {
@@ -103,5 +103,5 @@ function Node(data) {
     this.link = null;
 }
 
-module.exports = LinkedList;
+module.exports = SinglyLinkedList;
 
