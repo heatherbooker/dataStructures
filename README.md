@@ -4,9 +4,13 @@ A collection of custom data structures and algorithms.
 
 --> To demonstrate and cement comprehension of functionality of important data structures and algorithms.
 
-Each struct has a readme which lists its methods, explains its runtimes, and elucidates uses and pros/cons. Accompanying each implementation is a test script.
+Each struct has a readme which lists its methods and their runtimes (to add:and elucidates uses and pros/cons). Accompanying each implementation is a test script.
 
-Run tests:
+### Testing
+
+[View test coverage](https://heatherbooker.github.io/dataStructures/coverage/)
+
+Run tests locally:
 
 ```bash
 npm test
