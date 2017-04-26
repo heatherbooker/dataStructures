@@ -10,7 +10,7 @@ function DoublyLinkedList() {
 
     this.tail = null;
 
-    this.traverse = function(callback, goForward) {
+    const _traverse = (callback, goForward) => {
         let currNode = goForward ? this.head : this.tail;
         const results = {
             num: 0,
@@ -25,6 +25,10 @@ function DoublyLinkedList() {
         }
 
         return results;
+    };
+
+    this.traverse = function(callback) {
+        _traverse(callback, true);
     };
 
     this.add = function(data) {
@@ -46,7 +50,7 @@ function DoublyLinkedList() {
                 return node;
             }
         };
-        const currNode = this.traverse(find, false).node;
+        const currNode = _traverse(find, false).node;
 
         const prevNode = currNode.prev;
         const nodeToInsert = new Node(newData, currNode, prevNode);
@@ -65,7 +69,7 @@ function DoublyLinkedList() {
                 return node;
             }
         };
-        const currNode = this.traverse(find, true).node;
+        const currNode = _traverse(find, true).node;
 
         const nextNode = currNode.next;
         const nodeToInsert = new Node(newData, nextNode, currNode);
@@ -84,7 +88,7 @@ function DoublyLinkedList() {
                 return node;
             }
         };
-        const nodeToRemove = this.traverse(find, true).node;
+        const nodeToRemove = _traverse(find, true).node;
 
         const prevNode = nodeToRemove.prev;
         const nextNode = nodeToRemove.next;
@@ -103,12 +107,12 @@ function DoublyLinkedList() {
     this.toString = function() {
         const toString = (node, results) => {
             results.str += node.data + ' <-> ';
-            if (node.link == null) {
+            if (node.next == null) {
                 results.str += 'null';
                 return results.str;
             }
         };
-        return 'null <-> ' + this.traverse(toString, true).str;
+        return 'null <-> ' + _traverse(toString, true).str;
     };
 }
 
@@ -117,12 +121,6 @@ function Node(data, next, prev) {
     this.next = next;
     this.prev = prev;
 }
-
-Node.prototype = {
-    get link() {
-        return this.next;
-    }
-};
 
 module.exports = DoublyLinkedList;
 

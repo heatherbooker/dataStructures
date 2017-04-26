@@ -3,7 +3,7 @@
 function SinglyLinkedList() {
     this.head = null;
 
-    this.traverse = function(callback, needsResults) {
+    const _traverse = (callback, needsResults) => {
         let currNode = this.head;
         const results = {
             num: 0,
@@ -15,17 +15,21 @@ function SinglyLinkedList() {
             // Passing object allows callback to store whatever they want.
             // Else they can return a truthy value if they only want final.
             results._final = callback(currNode, results);
-            currNode = currNode.link;    
+            currNode = currNode.next;    
         }
         
         return results._final || results;
+    };
+
+    this.traverse = function(callback) {
+        _traverse(callback, false);
     };
 
     this.length = function() {
         const findLen = (node, results) => {
             const len = ++results.num;
         };
-        return this.traverse(findLen, true).num;
+        return _traverse(findLen, true).num;
     };
 
     this.add = function(data) {
@@ -35,9 +39,9 @@ function SinglyLinkedList() {
             this.head = nodeToAdd;
 
         } else {
-            const findLast = node => node.link === null ? node : null;
-            const currTail = this.traverse(findLast, false);
-            currTail.link = nodeToAdd;
+            const findLast = node => node.next === null ? node : null;
+            const currTail = _traverse(findLast, false);
+            currTail.next = nodeToAdd;
         }
     };
 
@@ -49,13 +53,13 @@ function SinglyLinkedList() {
             if (currNode.data === afterData) {
                 break;
             } else {
-                currNode = currNode.link;
+                currNode = currNode.next;
             }
         }
 
-        const nextNode = currNode.link;
-        currNode.link = nodeToInsert;
-        nodeToInsert.link = nextNode;
+        const nextNode = currNode.next;
+        currNode.next = nodeToInsert;
+        nodeToInsert.next = nextNode;
     };
 
     this.remove = function(data) {
@@ -67,40 +71,40 @@ function SinglyLinkedList() {
                 break;
             } else {
                 prevNode = currNode;
-                currNode = currNode.link;
+                currNode = currNode.next;
             }
         }
 
-        const nextNode = prevNode && prevNode.link.link || null;
+        const nextNode = prevNode && prevNode.next.next || null;
         if (prevNode === null) {
             this.head = nextNode;
         } else {
-            prevNode.link = nextNode;
+            prevNode.next = nextNode;
         }
     };
 
     this.toString = function() {
         const toString = (node, results) => {
             results.str += node.data + ' -> ';
-            if (node.link == null) {
+            if (node.next == null) {
                 results.str += 'null';
                 return results.str;
             }
         };
-        return this.traverse(toString, true);
+        return _traverse(toString, true);
     };
 
     this.toArray = function() {
         const toArray = (node, results) => {
             results.arr.push(node.data);
         };
-        return this.traverse(toArray, true).arr;
+        return _traverse(toArray, true).arr;
     };
 }
 
 function Node(data) {
     this.data = data;
-    this.link = null;
+    this.next = null;
 }
 
 module.exports = SinglyLinkedList;

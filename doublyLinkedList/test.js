@@ -47,6 +47,17 @@ describe('doubly linked list', function() {
         assert.equal(doublylinkedlist.length(), 3);
     });
 
+    it('can traverse the list', function() {
+        const sumTracker = {sum: 0};
+        const getSum = function(node) {
+            sumTracker.sum += node.data;
+        };
+        doublylinkedlist.add(22);
+        doublylinkedlist.add(33);
+        doublylinkedlist.traverse(getSum);
+        assert(sumTracker.sum === 55);
+    });
+
     describe('removing elements', function() {
         const doublylinkedlist = new DoublyLinkedList();
         const el1 = 'waffles';

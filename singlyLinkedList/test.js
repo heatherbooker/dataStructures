@@ -47,6 +47,17 @@ describe('singly linked list', function() {
         assert.equal(singlylinkedlist.length(), 3);
     });
 
+    it('can traverse the list', function() {
+        const sumTracker = {sum: 0};
+        const getSum = function(node) {
+            sumTracker.sum += node.data;
+        };
+        singlylinkedlist.add(22);
+        singlylinkedlist.add(33);
+        singlylinkedlist.traverse(getSum);
+        assert(sumTracker.sum === 55);
+    });
+
     describe('removing elements', function() {
         const singlylinkedlist = new Singlysinglylinkedlist();
         const el1 = 'waffles';
