@@ -29,7 +29,7 @@ describe('doubly linked list', function() {
         assert.include(list, el);
     });
 
-    it('takes O(n) to add (LOOK AT TIMES TO CONFIRM)', function() {
+    it('takes O(1) to add (LOOK AT TIMES TO CONFIRM)', function() {
         const times = [];
         for (let i = 1; i <= 2000; i+=40) {
             doublylinkedlist = new DoublyLinkedList();
@@ -116,7 +116,7 @@ describe('doubly linked list', function() {
     it('can be stringified', function() {
         doublylinkedlist.add('pizzasz');
         doublylinkedlist.add(7);
-        const string = 'pizzasz <-> 7 <-> null';
+        const string = 'null <-> pizzasz <-> 7 <-> null';
         assert.equal(string, doublylinkedlist.toString());
     });
 });

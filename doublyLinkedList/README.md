@@ -3,7 +3,7 @@
 
 ### Definition
 
-A linked list is a data structure wherein there is only one pointer, commonly called "head" to the first item in the list. From there, each item contains its own data as well as references to both the next and previous items in the list.
+A doubly linked list is a data structure wherein there are two pointers, commonly called "head" and "tail" to the first and last items respectively in the list. From there, each item contains its own data as well as references to both the next and previous items in the list.
 
 Because data in a linked list is not stored contiguously, it can allow small spaces in memory to be used to store just one or two items, as opposed to needing to store all items together.
 
@@ -14,7 +14,7 @@ This is a doubly linked list, meaning that each item references two others: the 
 
 Method      | Run time
 ---         | ---
-add         | O(n)
+add         | O(1)
 remove      | O(n)
 insertAfter | O(n)
 insertBefore| O(n)
