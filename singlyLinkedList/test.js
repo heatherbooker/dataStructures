@@ -1,6 +1,6 @@
 'use strict';
 
-const Singlysinglylinkedlist = require('./index.js');
+const SinglyLinkedList = require('./index.js');
 const chai = require('chai');
 const assert = chai.assert;
 const expect = chai.expect;
@@ -19,7 +19,7 @@ function timeToAddN(n) {
 describe('singly linked list', function() {
     
     beforeEach(function() {
-        singlylinkedlist = new Singlysinglylinkedlist();
+        singlylinkedlist = new SinglyLinkedList();
     });
     
     it('can add a new element', function() {
@@ -32,7 +32,7 @@ describe('singly linked list', function() {
     it('takes O(n) to add (LOOK AT TIMES TO CONFIRM)', function() {
         const times = [];
         for (let i = 1; i <= 2000; i+=40) {
-            singlylinkedlist = new Singlysinglylinkedlist();
+            singlylinkedlist = new SinglyLinkedList();
             times.push(timeToAddN(i));
         }
         console.log('times to add n elements, where n is from 1 - 2000, incrementing by 40', JSON.stringify(times));
@@ -59,7 +59,7 @@ describe('singly linked list', function() {
     });
 
     describe('removing elements', function() {
-        const singlylinkedlist = new Singlysinglylinkedlist();
+        const singlylinkedlist = new SinglyLinkedList();
         const el1 = 'waffles';
         const el2 = 'snoggin';
         const el3 = 'crepit crackinlack';
