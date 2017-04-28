@@ -77,12 +77,5 @@ describe('stack', function() {
         assert.throws(stack.pop);
         assert.throws(stack.peek);
     });
-
-    it('can be stringified', function() {
-        stack.push('pizzasz');
-        stack.push(7);
-        const string = 'pizzasz -> 7 -> null';
-        assert.equal(string, stack.toString());
-    });
 });
 

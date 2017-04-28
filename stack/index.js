@@ -1,13 +1,14 @@
 const SinglyLinkedList = require('../singlyLinkedList/index.js');
 
 function Stack() {
-    // Inherit head, length, toString, and toArray from SinglyLinkedList.
-    SinglyLinkedList.apply(this);
 
-    this.push = (data) => this.add(data);
+    // Use composition of singlylinkedlist.
+    this._list = new SinglyLinkedList();
+
+    this.push = (data) => this._list.add(data);
     
     this.pop = () => {
-        let current = this.head;
+        let current = this._list.head;
         let prev = null;
 
         if (current === null) {
@@ -17,7 +18,7 @@ function Stack() {
         while (true) {
             if (current.next === null) {
                 if (prev === null) {
-                    this.head = null;
+                    this._list.head = null;
                 } else {
                     prev.next = null;
                 }
@@ -29,7 +30,7 @@ function Stack() {
     };
 
     this.peek = () => {
-        let current = this.head;
+        let current = this._list.head;
 
         if (current === null) {
             throw new Error('Stack is empty, cannot "peek"');
@@ -42,6 +43,10 @@ function Stack() {
             current = current.next;
         }
     };
+
+    this.length = () => this._list.length();
+
+    this.toArray = () => this._list.toArray();
 }
 
 module.exports = Stack;

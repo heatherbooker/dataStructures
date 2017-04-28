@@ -33,6 +33,13 @@ Next, the add operator will be taken ("popped") off the stack. Then, because it 
 3
 (top)
 
+### Uses
+
+- backtracking in puzzles and games
+- keeping track of pages visited in web browser
+- basically anything involving 'back' or 'undo'
+- call stacks (see above example for very basic)
+- matching tags in xml or brackets in a text editor
 
 ### Methods
 
@@ -41,7 +48,6 @@ Method      | Run time
 push        | O(n)
 pop         | O(n)
 length      | O(n)
-toString    | O(n)
 toArray     | O(n)
 
 ### Test coverage
