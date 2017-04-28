@@ -27,12 +27,17 @@ npm run test-exercises
 
 ### Structs
 
+LINEAR COLLECTIONS  
+
 [x] Array  
 [x] Set  
 [x] Linked lists (doubly & singly)
 [ ] Stack  
 [ ] Queue  
-[ ] Hashmap  
+[ ] Hashmap  ???
+
+HIERARCHICAL COLLECTIONS  
+
 [ ] Tree  
 [ ] Binary search tree  
 [ ] Balanced tree  

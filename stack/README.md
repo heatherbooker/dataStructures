@@ -13,25 +13,25 @@ Stacks are how computers often manage instructions. For example, to add in assem
 
 Thus, we might imagine the stack looking like:
 
-(top)
-add
-2
-1
-(bottom)
+(top)  
+add  
+2  
+1  
+(bottom)  
 
-However, stacks are generally represented in the technical world as growing from top down. So actually, we should imagine the contents of the stack in the order we first listed the operations:
+However, stacks are traditionally represented in the technical world as growing from top down. So actually, we should imagine the contents of the stack in the order we first listed the operations:
 
-(bottom)
-1
-2
-add
-(top)
+(bottom)  
+1  
+2  
+add  
+(top)  
 
 Next, the add operator will be taken ("popped") off the stack. Then, because it knows it needs two operands, it will pop whatever the next two elements on the stack are off and use them. Then it can throw the answer onto the stack, and finally our stack looks like:
 
-(bottom)
-3
-(top)
+(bottom)  
+3  
+(top)  
 
 ### Uses
 
